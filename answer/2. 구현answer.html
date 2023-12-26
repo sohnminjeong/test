@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../reset.css" />
+  </head>
+  <!-- css -->
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    form {
+      width: 60%;
+    }
+    .form-content {
+      display: flex;
+      margin-bottom: 5px;
+    }
+    .form-content label {
+      width: 130px;
+      /* label에 width값 지정하면 input 줄이 모두 동일한 지점에서 시작함 */
+      font-weight: bold;
+      margin-top: 15px;
+      /* margin-top 말고 height, line-height도 사용 가능
+      height: 50px;
+      line-height: 50px; */
+    }
+    .form-content div {
+      display: flex;
+      flex: 1;
+      /* width 100%도 가능하고 flex1도 가능 */
+      flex-direction: column;
+      /* form-content class의 div인 input과 span을 flex, 1, column으로 지정 */
+    }
+    .form-content input {
+      padding: 15px 10px;
+      margin-bottom: 5px;
+    }
+    .form-content span {
+      height: 25px;
+      color: red;
+    }
+    button {
+      width: 100%;
+      cursor: pointer;
+      background: black;
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 20px;
+      /* height이 아닌 padding 줌으로써 글자와 button의 테두리 사이 여백 설정 */
+    }
+  </style>
+
+  <body>
+    <h1>회원가입</h1>
+    <form action="" onsubmit="return validate()">
+      <div class="form-content">
+        <label for="id">아이디</label>
+        <div>
+          <input type="text" id="id" />
+          <span id="id-span"></span>
+        </div>
+      </div>
+      <div class="form-content">
+        <label for="password">패스워드</label>
+        <div>
+          <input type="password" id="password" />
+          <span id="password-span"></span>
+        </div>
+      </div>
+      <div class="form-content">
+        <label for="password-check">패스워드 확인</label>
+        <div>
+          <input type="password" id="password-check" />
+          <span id="password-check-span"></span>
+        </div>
+      </div>
+      <div class="form-content">
+        <label for="email">이메일</label>\
+        <div>
+          <input type="text" id="email" />
+          <span id="email"></span>
+        </div>
+      </div>
+      <div class="form-content">
+        <label for="addr">주소</label>
+        <div>
+          <input type="text" id="addr" />
+          <span id="addr-span"></span>
+        </div>
+      </div>
+      <button type="submit">회원가입</button>
+    </form>
+
+    <!-- javscript -->
+    <script>
+      const id = document.querySelector("#id");
+      const idSpan = document.querySelector("#id-span");
+      const pwd = document.querySelector("#password");
+      const pwdSpan = document.querySelector("#password-span");
+      const pwdCheck = document.querySelector("#password-check");
+      const pwdCheckSpan = document.querySelector("#password-check-span");
+      // 이렇게 명시해두면 이후에 아이디.eventListener 자동완성됨
+
+      const idText = "필수 입력 항목입니다";
+      const pwdText = "영문자 대/소문자, 특수문자, 숫자 포함 8 ~ 32자";
+      const pwdCheckText = "비밀번호와 일치하지 않습니다";
+
+      id.addEventListener("input", function () {
+        if (id.value !== "") {
+          // id값이 공석이 아니라면
+          idSpan.innerHTML = "";
+        } else {
+          idSpan.innerHTML = idText;
+        }
+      });
+      const regExp = /^[!-~]{8,32}$/;
+      pwd.addEventListener("input", function () {
+        if (regExp.test(pwd.value)) {
+          pwdSpan.innerHTML = "";
+        } else {
+          pwdSpan.innerHTML = pwdText;
+        }
+      });
+
+      pwdCheck.addEventListener("input", function () {
+        if (pwd.value === pwdCheck.value) {
+          pwdCheckSpan.innerHTML = "";
+        } else {
+          pwdCheckSpan.innerHTML = pwdCheckText;
+        }
+      });
+
+      function validate() {
+        if (id.value === "") {
+          id.focus();
+          idSpan.innerHTML = idText;
+          return false;
+        } else if (!regExp.test(pwd.value)) {
+          pwd.focus();
+          pwdSpan.innerHTML = pwdText;
+          return false;
+        } else if (pwd.value !== pwdCheck.value) {
+          pwdCheck.focus();
+          pwdCheckSpan.innerHTML = pwdCheckText;
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>

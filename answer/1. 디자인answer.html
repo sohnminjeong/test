@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../reset.css" />
+    <script
+      src="https://kit.fontawesome.com/4602e82315.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <!-- css -->
+  <style>
+    body {
+      height: 100vh;
+      border: 1px solid;
+      /* border에서 color는 안적으면 black이 기본으로 들어감 */
+      display: flex;
+      flex-direction: column;
+      /* main에 height을 100%로 주고 전체 body에 display:flex, flex-directon:column으로 하면
+      main 부분이 스크롤 내려가지 않고 전체화면 꽉 채움*/
+    }
+    header {
+      display: flex;
+      height: 50px;
+      border-bottom: 1px solid;
+    }
+    .header-item {
+      flex: 1;
+      /* 전체에 기본 배율을 1로하고 4번째인 DAU DUA만 2배인 flex:2로 지정 */
+      text-align: center;
+      line-height: 50px;
+    }
+    .header-item h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .header-item:nth-child(4) {
+      flex: 2;
+    }
+    .header-item:not(:last-child) {
+      border-right: 1px solid;
+    }
+    nav {
+      height: 40px;
+      border-bottom: 1px solid;
+      line-height: 40px;
+      padding-left: 20px;
+      /* 안쪽에 있는 content를 밀어내야 함으로 padding으로! */
+    }
+
+    main {
+      height: 100%;
+      display: flex;
+    }
+    main > div {
+      flex: 1;
+      /* main에 display:flex를 넣고 div태그에 flex:1을 주면 사진과 글부분이 절반으로 나뉘어짐 */
+    }
+    .main-left {
+      background-image: url(../exam.jpg);
+      background-position: center;
+      background-size: cover;
+      /* backgroud이미지를 할 경우 url, position, size는 거의 한 세트 */
+      border-right: 1px solid;
+    }
+    .main-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .main-right h2 {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .main-right p {
+      line-height: 1.5;
+      width: 80%;
+      /* 글의 양쪽 여백은 width값으로 지정 */
+    }
+  </style>
+  <body>
+    <header>
+      <div class="header-item"><i class="fa-solid fa-bars"></i></div>
+      <div class="header-item">Best</div>
+      <div class="header-item">Catalog</div>
+      <div class="header-item"><h1>DAU DUA</h1></div>
+      <div class="header-item">Oil</div>
+      <div class="header-item"><i class="fa-regular fa-user"></i></div>
+      <div class="header-item"><i class="fa-solid fa-bag-shopping"></i></div>
+    </header>
+    <nav>
+      <a href="#">Home</a>
+      <span>/</span>
+      <a href="#">Catalog</a>
+      <span>/</span>
+      <a href="#">Oil</a>
+    </nav>
+    <main>
+      <div class="main-left"></div>
+      <div class="main-right">
+        <h2>DAU DUA</h2>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa
+          aperiam expedita explicabo necessitatibus, modi debitis quae fuga
+          ipsum aspernatur similique reprehenderit molestiae possimus tempore
+          sequi, soluta quaerat ex voluptas. Recusandae.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>
