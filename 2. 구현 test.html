@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../reset.css" />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      form {
+        width: 800px;
+        /* border: 1px solid black; */
+      }
+      div {
+        margin-bottom: 20px;
+      }
+      div label {
+        font-weight: bold;
+        /* margin-right: 60px; */
+        padding-right: 60px;
+      }
+      div input {
+        width: 630px;
+        height: 35px;
+        border-radius: 4%;
+      }
+      #userId {
+        margin-left: 50px;
+      }
+      #userPwd {
+        margin-left: 35px;
+      }
+      #userEmail {
+        margin-left: 55px;
+      }
+      #addr {
+        margin-left: 70px;
+      }
+      span {
+        display: block;
+        margin: 10px 165px;
+        width: 400px;
+        color: white;
+      }
+      button {
+        width: 800px;
+        height: 50px;
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>회원가입</h1>
+    <form action="" onsubmit="return validate()">
+      <div>
+        <label for="userId">아이디 </label>
+        <input type="text" id="userId" name="userId" />
+        <span id="userId_span"> 필수 입력 항목입니다. </span>
+      </div>
+      <div>
+        <label for="userPwd">패스워드</label>
+        <input type="password" id="userPwd" name="userPwd" />
+        <span id="userPwd_span">
+          영문자 대/소문자, 특수문자, 숫자 포함 8~32자
+        </span>
+      </div>
+      <div>
+        <label for="userPwdCheck">패스워드 확인</label>
+        <input type="password" id="userPwdCheck" name="userPwdCheck" />
+        <span id="userPwdCheck_span"> 비밀번호와 일치하지 않습니다. </span>
+      </div>
+      <div>
+        <label for="userEmail">이메일</label>
+        <input type="email" id="userEmail" name="userEmail" />
+      </div>
+      <div>
+        <label for="addr">주소</label>
+        <input type="text" id="addr" name="addr" />
+      </div>
+      <div id="result">
+        <button type="submit">회원가입</button>
+      </div>
+    </form>
+    <script>
+      function userIdCheck() {
+        const regExp = /^\w{1,}$/;
+        return regExp.test(userId.value);
+      }
+
+      function userPwdCheck1() {
+        const regExp = /^[!-~]{8,32}$/;
+        return regExp.test(userPwd.value);
+      }
+
+      function userPwdCheck2() {
+        return userPwd.value === userPwdCheck.value;
+      }
+
+      function mainCheck(e, check, message) {
+        if (check) {
+          e.target.nextElementSibling.style.color = "white";
+        } else {
+          e.target.nextElementSibling.style.color = "red";
+          e.target.nextElementSibling.innerHTML = message;
+        }
+      }
+
+      userId.addEventListener("input", function (e) {
+        mainCheck(e, userIdCheck(), "필수 입력 항목입니다.");
+      });
+
+      userPwd.addEventListener("input", function (e) {
+        mainCheck(
+          e,
+          userPwdCheck1(),
+          "영문자 대/소문자, 특수문자, 숫자 포함 8~32자"
+        );
+      });
+
+      userPwdCheck.addEventListener("input", function (e) {
+        mainCheck(e, userPwdCheck2(), "비밀번호와 일치하지 않습니다.");
+      });
+
+      function validate() {
+        if (!userIdCheck()) {
+          userId.focus();
+          userId_span.style.color = "red";
+          return false;
+        } else if (!userPwdCheck1()) {
+          userPwd.focus();
+          userPwd_span.style.color = "red";
+          return false;
+        } else if (!userPwdCheck2()) {
+          userPwdCheck.focus();
+          userPwdCheck_span.style.color = "red";
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>
